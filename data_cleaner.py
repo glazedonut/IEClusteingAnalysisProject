@@ -14,8 +14,11 @@ world['GDP'] = world['GDP'].str.replace(',', '')
 world['GDP'] = world['GDP'].str.replace('$', '')
 world['GDP']=world['GDP'].astype('float')
 world['Health Exp/Capita']=world['GDP'].replace('$', '').astype('float')
+regions=list(set(world["Region"]))
+print(regions)
 for i in range(len(world.columns.values)-2):
-    world[world.columns.values[i]]=world[world.columns.values[i]].replace(np.NaN,world[world.columns.values[i]].mean())
+    for j in regions:
+        world[world.columns.values[i]].loc[world["Region"]==j]=world[world.columns.values[i]].loc[world["Region"]==j].replace(np.NaN,world[world.columns.values[i]].loc[world["Region"]==j].mean())
 print(world.isnull().sum())    
 world.to_csv('data/World Indicators-clean.csv')
 
