@@ -18,7 +18,7 @@ regions=list(set(world["Region"]))
 print(regions)
 for i in range(len(world.columns.values)-2):
     for j in regions:
-        world[world.columns.values[i]].loc[world["Region"]==j]=world[world.columns.values[i]].loc[world["Region"]==j].replace(np.NaN,world[world.columns.values[i]].loc[world["Region"]==j].mean())
+        world[world.columns.values[i]].loc[world["Region"]==j]=world[world.columns.values[i]].loc[world["Region"]==j].replace(np.NaN,world[world.columns.values[i]].loc[world["Region"]==j].median())
 print(world.isnull().sum())    
 world.to_csv('data/World Indicators-clean.csv')
 
